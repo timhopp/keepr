@@ -27,6 +27,22 @@ namespace Keepr.Services
       }
       return foundKeep;
     }
+
+    public IEnumerable<Keep> GetByUser(string userId)
+    {
+      return _repo.GetByUser(userId);
+
+
+    }
+    public IEnumerable<Keep> GetMyKeeps(string userId)
+    {
+      IEnumerable<Keep> foundKeeps = GetMyKeeps(userId);
+      if (foundKeeps == null)
+      {
+        throw new Exception("Invalid user Id");
+      }
+      return foundKeeps;
+    }
     public Keep Create(Keep newKeep)
     {
       return _repo.Create(newKeep);
@@ -43,6 +59,8 @@ namespace Keepr.Services
       return "Deleted!";
     }
 
+    //NOTE Need a way to toggle the IsPrivate 
+    //Also, is a new function required to update the views and shares? Most likely
     public Keep Update(Keep updatedKeep)
     {
       Keep foundKeep = GetById(updatedKeep.Id);
@@ -56,5 +74,6 @@ namespace Keepr.Services
       }
       return updatedKeep;
     }
+
   }
 }

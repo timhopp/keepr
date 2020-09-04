@@ -45,9 +45,28 @@ namespace Keepr.Controllers
       }
     }
 
+    //NOTE Need to test this still once front end user is established
+    [HttpGet("user")]
+    public ActionResult<Keep> GetMyKeeps()
+    {
+      try
+      {
+        Claim user = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+        if (user == null)
+        {
+          throw new Exception("You must be logged in to get your Keeps, sir");
+        }
+
+        return Ok(_ks.GetMyKeeps(user.Value));
+      }
+      catch (System.Exception err)
+      {
+        return BadRequest(err.Message);
+      }
+    }
+
     [HttpPost]
-    //NOTE  ADD BACK WHEN GETTING USER AUTH
-    // [Authorize]
+    [Authorize]
     public ActionResult<Keep> Post([FromBody] Keep newKeep)
     {
       try
@@ -62,7 +81,7 @@ namespace Keepr.Controllers
       }
     }
 
-    //[Authorize]
+    [Authorize]
     [HttpDelete("{id}")]
     public ActionResult<Keep> Delete(int id)
     {
@@ -81,20 +100,19 @@ namespace Keepr.Controllers
       }
     }
 
-    //[Authorized]
+    [Authorize]
     [HttpPut("{id}")]
     public ActionResult<Keep> Update(int id, [FromBody] Keep updatedKeep)
     {
       try
       {
-        //NOTE  Add back after testing!!
-        //  Claim user = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
-        //         if (user == null)
-        //         {
-        //             throw new Exception("You must be logged in to make a Keep, sir.");
-        //         }
-        // updatedKeep.UserId = user.Value;
-        // updatedKeep.Id = id;
+        Claim user = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+        if (user == null)
+        {
+          throw new Exception("You must be logged in to make a Keep, sir.");
+        }
+        updatedKeep.UserId = user.Value;
+        updatedKeep.Id = id;
         return Ok(_ks.Update(updatedKeep));
       }
       catch (System.Exception err)

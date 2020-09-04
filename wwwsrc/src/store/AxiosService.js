@@ -7,10 +7,10 @@ let baseUrl = location.host.includes("localhost")
 export const api = Axios.create({
   baseURL: baseUrl + "api/",
   timeout: 3000,
-  withCredentials: true
+  withCredentials: true,
 });
 
-export const setBearer = function(bearer) {
+export const setBearer = function({}, bearer) {
   api.defaults.headers.authorization = bearer;
 };
 
