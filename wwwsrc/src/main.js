@@ -1,5 +1,5 @@
 import Vue from "vue";
-import App from "./App.vue";
+import App from "./App";
 import router from "./router";
 import store from "./store";
 import { Auth0Plugin, onAuth } from "@bcwdev/auth0-vue";
@@ -9,13 +9,13 @@ Vue.use(Auth0Plugin, {
   domain,
   clientId,
   audience,
-  onRedirectCallback: appState => {
+  onRedirectCallback: (appState) => {
     router.push(
       appState && appState.targetUrl
         ? appState.targetUrl
         : window.location.pathname
     );
-  }
+  },
 });
 
 new Vue({
@@ -23,5 +23,5 @@ new Vue({
   store,
   render: function(h) {
     return h(App);
-  }
+  },
 }).$mount("#app");

@@ -11,8 +11,8 @@
 
 CREATE TABLE keeps (
     id int NOT NULL AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL,
-    description VARCHAR(255) NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    article VARCHAR(255) NOT NULL,
     userId VARCHAR(255),
     img VARCHAR(255),
     isPrivate TINYINT,
@@ -22,6 +22,7 @@ CREATE TABLE keeps (
     INDEX userId (userId),
     PRIMARY KEY (id)
 );
+
 
 -- CREATE TABLE vaultkeeps (
 --     id int NOT NULL AUTO_INCREMENT,
