@@ -36,7 +36,7 @@ namespace Keepr.Services
     }
     public IEnumerable<Keep> GetMyKeeps(string userId)
     {
-      IEnumerable<Keep> foundKeeps = GetMyKeeps(userId);
+      IEnumerable<Keep> foundKeeps = _repo.GetByUser(userId);
       if (foundKeeps == null)
       {
         throw new Exception("Invalid user Id");
@@ -48,10 +48,11 @@ namespace Keepr.Services
       return _repo.Create(newKeep);
     }
 
-    internal object Delete(string userId, int id)
+    //string userId, userId,
+    internal object Delete(int id)
     {
       GetById(id);
-      bool deleted = _repo.Delete(userId, id);
+      bool deleted = _repo.Delete(id);
       if (!deleted)
       {
         throw new Exception("You can't delete a Keep you don't own!");

@@ -1,12 +1,14 @@
 <template>
   <div class="dashboard">
-    <h1>WELCOME TO THE DASHBOARD</h1>
+    <h1>Your Profile</h1>
   </div>
 </template>
 
 <script>
 export default {
-  mounted() {},
+  mounted() {
+    this.$store.dispatch("getMyKeeps");
+  },
   computed: {},
 };
 </script>

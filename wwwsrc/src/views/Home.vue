@@ -1,6 +1,8 @@
 <template>
   <div class="home">
     <h1>Welcome To Keeper</h1>
+
+    <!-- Keeps Modal -->
     <button
       type="button"
       class="btn btn-success"
@@ -40,6 +42,36 @@
       </div>
     </div>
     <div v-for="keep in publicKeeps" :key="keep.id">{{keep.title}} {{keep.article}}</div>
+    <!-- Vaults Modal -->
+    <button
+      type="button"
+      class="btn btn-success"
+      data-toggle="modal"
+      data-target="#vaultModal"
+    >Create Vault</button>
+    <div class="modal fade" id="vaultModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Create A Vault</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form @submit.prevent="createVault(newVault)">
+              <label for>Name</label>
+              <input type="text" placeholder="Name" v-model="newVault.Name" required />
+              <label for>Description</label>
+              <input type="text" placeholder="Description" v-model="newVault.Description" required />
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Create Vault</button>
+            </form>
+          </div>
+          <div class="modal-footer"></div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -49,6 +81,7 @@ export default {
   data() {
     return {
       newKeep: {},
+      newVault: {},
     };
   },
   computed: {
@@ -68,6 +101,9 @@ export default {
     },
     createKeep(newKeep) {
       this.$store.dispatch("createKeep", this.newKeep);
+    },
+    createVault(newVault) {
+      this.$store.dispatch("createVault", this.newVault);
     },
   },
 };

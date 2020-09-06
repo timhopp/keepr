@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Keepr.Models;
 using Keepr.Services;
+using Keppr.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -13,31 +13,20 @@ namespace Keepr.Controllers
 {
   [ApiController]
   [Route("api/[controller]")]
-  public class KeepsController : ControllerBase
+  public class VaultsController : ControllerBase
   {
-    private readonly KeepsService _ks;
-    public KeepsController(KeepsService ks)
+    private readonly VaultsService _vs;
+    public VaultsController(VaultsService vs)
     {
-      _ks = ks;
+      _vs = vs;
     }
-    [HttpGet]
-    public ActionResult<IEnumerable<Keep>> Get()
-    {
-      try
-      {
-        return Ok(_ks.Get());
-      }
-      catch (Exception e)
-      {
-        return BadRequest(e.Message);
-      };
-    }
+
     [HttpGet("{id}")]
-    public ActionResult<Keep> GetById(int id)
+    public ActionResult<Vault> GetById(int id)
     {
       try
       {
-        return Ok(_ks.GetById(id));
+        return Ok(_vs.GetById(id));
       }
       catch (System.Exception err)
       {
@@ -47,7 +36,7 @@ namespace Keepr.Controllers
 
     //NOTE Need to test this still once front end user is established
     [HttpGet("user")]
-    public ActionResult<Keep> GetMyKeeps()
+    public ActionResult<Vault> GetMyKeeps()
     {
       try
       {
@@ -57,7 +46,7 @@ namespace Keepr.Controllers
           throw new Exception("You must be logged in to get your Keeps, sir");
         }
 
-        return Ok(_ks.GetMyKeeps(user.Value));
+        return Ok(_vs.GetMyVaults(user.Value));
       }
       catch (System.Exception err)
       {
@@ -67,13 +56,13 @@ namespace Keepr.Controllers
 
     [HttpPost]
     [Authorize]
-    public ActionResult<Keep> Post([FromBody] Keep newKeep)
+    public ActionResult<Vault> Post([FromBody] Vault newVault)
     {
       try
       {
         var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        newKeep.UserId = userId;
-        return Ok(_ks.Create(newKeep));
+        newVault.UserId = userId;
+        return Ok(_vs.Create(newVault));
       }
       catch (Exception e)
       {
@@ -84,17 +73,17 @@ namespace Keepr.Controllers
     // [Authorize]
     [HttpDelete("{id}")]
     //user.Value,
-    public ActionResult<Keep> Delete(int id)
+    public ActionResult<Vault> Delete(int id)
     {
       try
       {
         // Claim user = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
         // if (user == null)
         // {
-        //   throw new Exception("You must be logged in to create a Keep, sir");
+        //   throw new Exception("You must be logged in to create a Vault, sir");
         // }
 
-        return Ok(_ks.Delete(id));
+        return Ok(_vs.Delete(id));
       }
       catch (System.Exception err)
       {
@@ -104,27 +93,24 @@ namespace Keepr.Controllers
 
     [Authorize]
     [HttpPut("{id}")]
-    public ActionResult<Keep> Update(int id, [FromBody] Keep updatedKeep)
+    public ActionResult<Vault> Update(int id, [FromBody] Vault updatedVault)
     {
       try
       {
         Claim user = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
         if (user == null)
         {
-          throw new Exception("You must be logged in to make a Keep, sir.");
+          throw new Exception("You must be logged in to make a Vault, sir.");
         }
-        updatedKeep.UserId = user.Value;
-        updatedKeep.Id = id;
-        return Ok(_ks.Update(updatedKeep));
+        updatedVault.UserId = user.Value;
+        updatedVault.Id = id;
+        return Ok(_vs.Update(updatedVault));
       }
       catch (System.Exception err)
       {
         return BadRequest(err.Message);
       }
     }
-
-
-
 
 
 

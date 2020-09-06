@@ -23,7 +23,7 @@ namespace Keepr.Repositories
 
     internal IEnumerable<Keep> GetByUser(string userId)
     {
-      string sql = "SELECT * FROM Keeps WHERE userID = @userId";
+      string sql = "SELECT * FROM Keeps WHERE userId = @UserId";
       return _db.Query<Keep>(sql);
     }
     internal Keep GetById(int id)
@@ -44,10 +44,11 @@ namespace Keepr.Repositories
 
 
     //NOTE NEED TO ADD USER ID BRUH
-    internal bool Delete(string userId, int id)
+    //string userId, userId,  AND userId = @UserId 
+    internal bool Delete(int id)
     {
-      string sql = "DELETE FROM Keeps WHERE id = @Id AND userId = @UserId LIMIT 1";
-      int rowsAffected = _db.Execute(sql, new { userId, id });
+      string sql = "DELETE FROM Keeps WHERE id = @Id LIMIT 1";
+      int rowsAffected = _db.Execute(sql, new { id });
       return rowsAffected == 1;
     }
 

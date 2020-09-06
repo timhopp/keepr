@@ -20,6 +20,7 @@ export default new Vuex.Store({
     user: {},
     publicKeeps: [],
     privateKeeps: [],
+    myKeeps: [],
   },
   mutations: {
     setUserInfo(state, userInfo) {
@@ -30,6 +31,9 @@ export default new Vuex.Store({
     },
     setPublicKeeps(state, publicKeeps) {
       state.publicKeeps = publicKeeps;
+    },
+    setMyKeeps(state, myKeeps) {
+      state.myKeeps = myKeeps;
     },
   },
   actions: {
@@ -53,9 +57,21 @@ export default new Vuex.Store({
         console.error(error);
       }
     },
+    async createVault({ commit }, newVault) {
+      try {
+        let res = await api.post("vaults", newVault);
+        console.log(res);
+      } catch (error) {
+        console.error(error);
+      }
+    },
     getPublicKeeps({ commit, dispatch }) {
       api.get("keeps").then((res) => commit("setPublicKeeps", res.data));
       console.log("got keeps");
+    },
+    getMyKeeps({ commit }) {
+      api.get("keeps/user").then((res) => commit("setMyKeeps", res.data));
+      console.log("got my keeps");
     },
   },
 });
