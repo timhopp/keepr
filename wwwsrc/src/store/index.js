@@ -28,6 +28,9 @@ export default new Vuex.Store({
     clearUserInfo(state) {
       state.user = {};
     },
+    setPublicKeeps(state, publicKeeps) {
+      state.publicKeeps = publicKeeps;
+    },
   },
   actions: {
     setBearer({}, bearer) {
@@ -49,6 +52,10 @@ export default new Vuex.Store({
       } catch (error) {
         console.error(error);
       }
+    },
+    getPublicKeeps({ commit, dispatch }) {
+      api.get("keeps").then((res) => commit("setPublicKeeps", res.data));
+      console.log("got keeps");
     },
   },
 });

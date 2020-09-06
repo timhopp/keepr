@@ -39,6 +39,7 @@
         </div>
       </div>
     </div>
+    <div v-for="keep in publicKeeps" :key="keep.id">{{keep.title}} {{keep.article}}</div>
   </div>
 </template>
 
@@ -54,6 +55,12 @@ export default {
     user() {
       return this.$store.state.user;
     },
+    publicKeeps() {
+      return this.$store.state.publicKeeps;
+    },
+  },
+  mounted() {
+    this.$store.dispatch("getPublicKeeps");
   },
   methods: {
     logout() {
