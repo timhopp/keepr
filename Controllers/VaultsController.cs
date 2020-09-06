@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Keepr.Models;
 using Keepr.Services;
 using Keppr.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -16,9 +17,12 @@ namespace Keepr.Controllers
   public class VaultsController : ControllerBase
   {
     private readonly VaultsService _vs;
-    public VaultsController(VaultsService vs)
+    private readonly VaultKeepsService _vks;
+    public VaultsController(VaultsService vs, VaultKeepsService vks)
     {
       _vs = vs;
+      _vks = vks;
+
     }
 
     [HttpGet("{id}")]
@@ -34,9 +38,8 @@ namespace Keepr.Controllers
       }
     }
 
-    //NOTE Need to test this still once front end user is established
     [HttpGet("user")]
-    public ActionResult<Vault> GetMyKeeps()
+    public ActionResult<Vault> GetMyVaults()
     {
       try
       {
@@ -51,6 +54,20 @@ namespace Keepr.Controllers
       catch (System.Exception err)
       {
         return BadRequest(err.Message);
+      }
+    }
+
+    // [Authorize]
+    [HttpGet("{vaultId}/keeps")]
+    public ActionResult<VaultKeep> GetKeepsByVaultId(int vaultId)
+    {
+      try
+      {
+        return Ok(_vks.GetKeepsByVaultId(vaultId));
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
       }
     }
 
@@ -77,11 +94,11 @@ namespace Keepr.Controllers
     {
       try
       {
-        // Claim user = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
-        // if (user == null)
-        // {
-        //   throw new Exception("You must be logged in to create a Vault, sir");
-        // }
+        Claim user = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+        if (user == null)
+        {
+          throw new Exception("You must be logged in to create a Vault, sir");
+        }
 
         return Ok(_vs.Delete(id));
       }

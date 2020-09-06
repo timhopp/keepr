@@ -19,8 +19,10 @@ export default new Vuex.Store({
   state: {
     user: {},
     publicKeeps: [],
+    //Do I still need a private keeps?
     privateKeeps: [],
     myKeeps: [],
+    vaults: [],
   },
   mutations: {
     setUserInfo(state, userInfo) {
@@ -34,6 +36,9 @@ export default new Vuex.Store({
     },
     setMyKeeps(state, myKeeps) {
       state.myKeeps = myKeeps;
+    },
+    setVaults(state, vaults) {
+      state.vaults = vaults;
     },
   },
   actions: {
@@ -72,6 +77,10 @@ export default new Vuex.Store({
     getMyKeeps({ commit }) {
       api.get("keeps/user").then((res) => commit("setMyKeeps", res.data));
       console.log("got my keeps");
+    },
+    getMyVaults({ commit }) {
+      api.get("vaults/user").then((res) => commit("setVaults", res.data));
+      console.log("got vaults");
     },
   },
 });

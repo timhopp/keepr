@@ -81,18 +81,19 @@ namespace Keepr.Controllers
       }
     }
 
-    // [Authorize]
+    //NOTE MUST ADD userID back for delete!
+    [Authorize]
     [HttpDelete("{id}")]
     //user.Value,
     public ActionResult<Keep> Delete(int id)
     {
       try
       {
-        // Claim user = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
-        // if (user == null)
-        // {
-        //   throw new Exception("You must be logged in to create a Keep, sir");
-        // }
+        Claim user = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+        if (user == null)
+        {
+          throw new Exception("You must be logged in to create a Keep, sir");
+        }
 
         return Ok(_ks.Delete(id));
       }

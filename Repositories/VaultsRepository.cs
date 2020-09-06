@@ -19,7 +19,7 @@ namespace Keepr.Repositories
     internal IEnumerable<Vault> GetByUser(string userId)
     {
       string sql = "SELECT * FROM Vaults WHERE userId = @UserId";
-      return _db.Query<Vault>(sql);
+      return _db.Query<Vault>(sql, new { userId });
     }
     internal Vault GetById(int id)
     {
@@ -53,7 +53,7 @@ namespace Keepr.Repositories
       UPDATE Vaults SET
       name = @name,
       description = @description,
-      WHERE id = @id AND userid = @UserId LIMIT 1;";
+      WHERE id = @id AND userid = @userid LIMIT 1;";
       int rowsAffected = _db.Execute(sql, updatedVault);
       return rowsAffected == 1;
     }
