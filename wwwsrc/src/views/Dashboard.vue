@@ -2,14 +2,17 @@
   <div class="dashboard">
     <h1>Your Profile</h1>
     <h3>Your Vaults</h3>
-    <div v-for="vault in vaults" :key="vault.id">{{vault.name}} {{vault.description}}</div>
+    <vault v-for="aVault in vaults" :vault="aVault" :key="aVault.id"></vault>
     <h3>Your Keeps</h3>
-    <div v-for="keep in myKeeps" :key="keep.id">{{keep.title}}</div>
+    <keep v-for="currentKeep in myKeeps" :keep="currentKeep" :key="currentKeep.id"></keep>
   </div>
 </template>
 
 <script>
+import keep from "../components/keep";
+import vault from "../components/vault";
 export default {
+  props: ["keep"],
   mounted() {
     this.$store.dispatch("getMyKeeps");
     this.$store.dispatch("getMyVaults");
@@ -22,6 +25,10 @@ export default {
     myKeeps() {
       return this.$store.state.myKeeps;
     },
+  },
+  components: {
+    keep,
+    vault,
   },
 };
 </script>

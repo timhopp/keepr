@@ -21,8 +21,11 @@ export default new Vuex.Store({
     publicKeeps: [],
     //Do I still need a private keeps?
     privateKeeps: [],
+    currentKeep: [],
     myKeeps: [],
     vaults: [],
+    currentVault: [],
+    currentVaultKeeps: [],
   },
   mutations: {
     setUserInfo(state, userInfo) {
@@ -37,8 +40,17 @@ export default new Vuex.Store({
     setMyKeeps(state, myKeeps) {
       state.myKeeps = myKeeps;
     },
+    setCurrentKeep(state, currentKeep) {
+      state.currentKeep = currentKeep;
+    },
     setVaults(state, vaults) {
       state.vaults = vaults;
+    },
+    setCurrentVault(state, currentVault) {
+      state.currentVault = currentVault;
+    },
+    setCurrentVaultKeeps(state, currentVaultKeeps) {
+      state.currentVaultKeeps = currentVaultKeeps;
     },
   },
   actions: {
@@ -57,6 +69,7 @@ export default new Vuex.Store({
     async createKeep({ commit, dispatch }, newKeep) {
       try {
         let res = await api.post("keeps", newKeep);
+        this.dispatch("getPublicKeeps");
         console.log(res);
       } catch (error) {
         console.error(error);
@@ -70,17 +83,35 @@ export default new Vuex.Store({
         console.error(error);
       }
     },
+    async addToVault({ commit }, data) {
+      try {
+        let res = await api.post("vaultkeeps", data);
+        console.log(res);
+      } catch (error) {
+        console.error(error);
+      }
+    },
     getPublicKeeps({ commit, dispatch }) {
       api.get("keeps").then((res) => commit("setPublicKeeps", res.data));
-      console.log("got keeps");
     },
     getMyKeeps({ commit }) {
       api.get("keeps/user").then((res) => commit("setMyKeeps", res.data));
-      console.log("got my keeps");
     },
     getMyVaults({ commit }) {
       api.get("vaults/user").then((res) => commit("setVaults", res.data));
-      console.log("got vaults");
+    },
+    getCurrentKeep({ commit }, id) {
+      api.get("keeps/" + id).then((res) => commit("setCurrentKeep", res.data));
+    },
+    getCurrentVault({ commit }, id) {
+      api
+        .get("vaults/" + id)
+        .then((res) => commit("setCurrentVault", res.data));
+    },
+    getVaultKeeps({ commit }, id) {
+      api
+        .get("vaults/" + id + "/keeps")
+        .then((res) => commit("setCurrentVaultKeeps", res.data));
     },
   },
 });

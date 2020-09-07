@@ -18,9 +18,9 @@ namespace Keepr.Repositories
     {
       string sql = @"
       INSERT INTO VaultKeeps
-      (vaultId, keepId)
+      (vaultId, keepId, userId)
       VALUES
-      (@VaultId, @KeepId);
+      (@VaultId, @KeepId, @userId);
       SELECT LAST_INSERT_ID();";
       return _db.ExecuteScalar<int>(sql, newVaultKeep);
     }
@@ -30,8 +30,7 @@ namespace Keepr.Repositories
       string sql = @"
         SELECT
         keeps.*,
-        vaultkeeps.id as vaultKeepId,
-        vault.name as vaultName
+        vaultkeeps.id as vaultKeepId
         FROM VaultKeeps
         INNER JOIN keeps on keeps.id = vaultkeeps.keepId
         WHERE(vaultkeeps.vaultId = @vaultId)";

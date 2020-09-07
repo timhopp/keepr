@@ -41,7 +41,6 @@
         </div>
       </div>
     </div>
-    <div v-for="keep in publicKeeps" :key="keep.id">{{keep.title}} {{keep.article}}</div>
     <!-- Vaults Modal -->
     <button
       type="button"
@@ -72,10 +71,12 @@
         </div>
       </div>
     </div>
+    <keep v-for="keepItem in publicKeeps" :keep="keepItem" :key="keepItem.id"></keep>
   </div>
 </template>
 
 <script>
+import keep from "../components/keep";
 export default {
   name: "home",
   data() {
@@ -84,6 +85,7 @@ export default {
       newVault: {},
     };
   },
+  props: ["keep"],
   computed: {
     user() {
       return this.$store.state.user;
@@ -105,6 +107,9 @@ export default {
     createVault(newVault) {
       this.$store.dispatch("createVault", this.newVault);
     },
+  },
+  components: {
+    keep,
   },
 };
 </script>
