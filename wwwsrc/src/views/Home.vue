@@ -21,9 +21,9 @@
           <div class="modal-body">
             <form @submit.prevent="createKeep(newKeep)">
               <label for>Title</label>
-              <input type="text" placeholder="Title" v-model="newKeep.Title" required />
+              <input type="text" placeholder="Title" v-model="newKeep.Name" required />
               <label for>Article Link</label>
-              <input type="text" placeholder="Article" v-model="newKeep.Article" required />
+              <input type="text" placeholder="Article" v-model="newKeep.Description" required />
               <label for>Img</label>
               <input type="text" placeholder="imgUrl" v-model="newKeep.Img" />
               <label class="form-check-label" for="privateCheck">Private</label>
@@ -96,6 +96,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch("getPublicKeeps");
+    this.$store.dispatch("clearVaultKeeps");
   },
   methods: {
     logout() {

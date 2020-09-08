@@ -43,10 +43,10 @@ namespace Keepr.Services
     }
 
     //string userId, userId,
-    internal object Delete(int id)
+    internal object Delete(string userId, int id)
     {
       GetById(id);
-      bool deleted = _repo.Delete(id);
+      bool deleted = _repo.Delete(userId, id);
       if (!deleted)
       {
         throw new Exception("You can't delete a Vault you don't own!");
@@ -59,8 +59,8 @@ namespace Keepr.Services
     public Vault Update(Vault updatedVault)
     {
       Vault foundVault = GetById(updatedVault.Id);
-      updatedVault.Name = updatedVault.Name == null ? updatedVault.Name : foundVault.Name;
-      updatedVault.Description = updatedVault.Description == null ? updatedVault.Description : foundVault.Description;
+      updatedVault.Name = updatedVault.Name == null ? foundVault.Name : updatedVault.Name;
+      updatedVault.Description = updatedVault.Description == null ? foundVault.Description : updatedVault.Description;
 
       bool updated = _repo.Update(updatedVault);
       if (!updated)

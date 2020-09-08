@@ -42,6 +42,9 @@ namespace Keepr.Controllers
       }
     }
 
+    [HttpDelete]
+    public ActionResult<VaultKeep> Delete([FromBody] )
+
     // [HttpGet]
     // public ActionResult<IEnumerable<VaultKeep>> Get()
     // {

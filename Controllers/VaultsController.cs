@@ -71,8 +71,8 @@ namespace Keepr.Controllers
       }
     }
 
-    [HttpPost]
     [Authorize]
+    [HttpPost]
     public ActionResult<Vault> Post([FromBody] Vault newVault)
     {
       try
@@ -87,9 +87,8 @@ namespace Keepr.Controllers
       }
     }
 
-    // [Authorize]
+    [Authorize]
     [HttpDelete("{id}")]
-    //user.Value,
     public ActionResult<Vault> Delete(int id)
     {
       try
@@ -100,7 +99,7 @@ namespace Keepr.Controllers
           throw new Exception("You must be logged in to create a Vault, sir");
         }
 
-        return Ok(_vs.Delete(id));
+        return Ok(_vs.Delete(user.Value, id));
       }
       catch (System.Exception err)
       {

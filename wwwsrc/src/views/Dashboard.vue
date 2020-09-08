@@ -16,6 +16,7 @@ export default {
   mounted() {
     this.$store.dispatch("getMyKeeps");
     this.$store.dispatch("getMyVaults");
+    this.$store.dispatch("clearVaultKeeps");
   },
   computed: {
     vaults() {

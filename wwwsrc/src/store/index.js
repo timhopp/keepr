@@ -52,6 +52,9 @@ export default new Vuex.Store({
     setCurrentVaultKeeps(state, currentVaultKeeps) {
       state.currentVaultKeeps = currentVaultKeeps;
     },
+    clearVaultKeeps(state) {
+      state.currentVaultKeeps = [];
+    },
   },
   actions: {
     setBearer({}, bearer) {
@@ -91,6 +94,46 @@ export default new Vuex.Store({
         console.error(error);
       }
     },
+    async deleteVault({ commit }, vaultId) {
+      try {
+        api.delete("vaults/" + vaultId);
+        console.log("vault deleted");
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async deleteKeep({ commit }, id) {
+      try {
+        api.delete("keeps/" + id);
+        console.log("delete");
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async editKeep({ dispatch }, editedKeep) {
+      try {
+        let res = await api.put("keeps/" + editedKeep.id, editedKeep);
+        this.dispatch("getCurrentKeep", editedKeep.id);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async editVault({ dispatch }, editedVault) {
+      try {
+        let res = await api.put("vaults/" + editedVault.id, editedVault);
+        this.dispatch("getCurrentVault", editedVault.id);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+
+    async deleteVaultKeep({ state, dispatch }, keepId) {
+      debugger;
+      let foundVaultKeep = this.state.currentVaultKeeps.find(
+        (vaultkeep) => vaultkeep.keepId == keepId
+      );
+      console.log("found it", foundVaultKeep);
+    },
     getPublicKeeps({ commit, dispatch }) {
       api.get("keeps").then((res) => commit("setPublicKeeps", res.data));
     },
@@ -112,6 +155,9 @@ export default new Vuex.Store({
       api
         .get("vaults/" + id + "/keeps")
         .then((res) => commit("setCurrentVaultKeeps", res.data));
+    },
+    clearVaultKeeps({ commit }) {
+      commit("clearVaultKeeps");
     },
   },
 });

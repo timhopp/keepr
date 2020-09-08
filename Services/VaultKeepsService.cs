@@ -30,7 +30,7 @@ namespace Keepr.Services
       throw new NotImplementedException();
     }
 
-    internal IEnumerable<VaultKeep> GetKeepsByVaultId(int vaultId)
+    internal IEnumerable<VaultKeepViewModel> GetKeepsByVaultId(int vaultId)
     {
       return _repo.GetKeepsByVaultId(vaultId);
     }

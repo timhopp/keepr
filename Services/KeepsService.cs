@@ -65,9 +65,9 @@ namespace Keepr.Services
     public Keep Update(Keep updatedKeep)
     {
       Keep foundKeep = GetById(updatedKeep.Id);
-      updatedKeep.Title = updatedKeep.Title == null ? updatedKeep.Title : foundKeep.Title;
-      updatedKeep.Article = updatedKeep.Article == null ? updatedKeep.Article : foundKeep.Article;
-      updatedKeep.Img = updatedKeep.Img == null ? updatedKeep.Img : foundKeep.Img;
+      updatedKeep.Name = updatedKeep.Name == null ? foundKeep.Name : updatedKeep.Name;
+      updatedKeep.Description = updatedKeep.Description == null ? foundKeep.Description : updatedKeep.Description;
+      updatedKeep.Img = updatedKeep.Img == null ? foundKeep.Img : updatedKeep.Img;
       bool updated = _repo.Update(updatedKeep);
       if (!updated)
       {

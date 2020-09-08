@@ -11,8 +11,8 @@
 
 -- CREATE TABLE keeps (
 --     id int NOT NULL AUTO_INCREMENT,
---     title VARCHAR(255) NOT NULL,
---     article VARCHAR(255) NOT NULL,
+--     name VARCHAR(255) NOT NULL,
+--     description VARCHAR(255) NOT NULL,
 --     userId VARCHAR(255),
 --     img VARCHAR(255),
 --     isPrivate TINYINT,
@@ -44,7 +44,7 @@
 -- )
 
 
--- -- USE THIS LINE FOR GET KEEPS BY VAULTID
+-- USE THIS LINE FOR GET KEEPS BY VAULTID
 -- SELECT 
 -- k.*,
 -- vk.id as vaultKeepId
@@ -59,3 +59,5 @@
 -- DROP TABLE IF EXISTS vaults;
 -- DROP TABLE IF EXISTS keeps;
 -- DROP TABLE IF EXISTS users;
+
+

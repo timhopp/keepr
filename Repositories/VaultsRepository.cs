@@ -40,10 +40,10 @@ namespace Keepr.Repositories
 
     //NOTE NEED TO ADD USER ID BRUH
     //string userId, userId,  AND userId = @UserId 
-    internal bool Delete(int id)
+    internal bool Delete(string userid, int id)
     {
-      string sql = "DELETE FROM Vaults WHERE id = @Id LIMIT 1";
-      int rowsAffected = _db.Execute(sql, new { id });
+      string sql = "DELETE FROM Vaults WHERE id = @Id AND userid = @UserId LIMIT 1;";
+      int rowsAffected = _db.Execute(sql, new { userid, id });
       return rowsAffected == 1;
     }
 
@@ -52,8 +52,8 @@ namespace Keepr.Repositories
       string sql = @"
       UPDATE Vaults SET
       name = @name,
-      description = @description,
-      WHERE id = @id AND userid = @userid LIMIT 1;";
+      description = @description
+      WHERE id = @id AND userid = @userId LIMIT 1;";
       int rowsAffected = _db.Execute(sql, updatedVault);
       return rowsAffected == 1;
     }
