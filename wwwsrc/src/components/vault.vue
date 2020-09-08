@@ -15,7 +15,11 @@ export default {
   data() {
     return {};
   },
-  computed: {},
+  computed: {
+    vaultKeeps() {
+      return this.$store.state.currentVaultKeeps;
+    },
+  },
   methods: {
     viewVault(id) {
       this.$router.push({ name: "currentVault", params: { vaultId: id } });

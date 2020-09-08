@@ -34,5 +34,27 @@ namespace Keepr.Services
     {
       return _repo.GetKeepsByVaultId(vaultId);
     }
+
+    internal object Delete(string userId, int id)
+    {
+      GetByVaultKeepId(id);
+      bool deleted = _repo.Delete(userId, id);
+      if (!deleted)
+      {
+        throw new Exception("You can't delete a Vault Keep you don't own!");
+      }
+      return "Deleted!";
+    }
+
+
+    public VaultKeep GetByVaultKeepId(int id)
+    {
+      VaultKeep foundVaultKeep = _repo.GetByVaultKeepId(id);
+      if (foundVaultKeep == null)
+      {
+        throw new Exception("Invalid Keep Id");
+      }
+      return foundVaultKeep;
+    }
   }
 }

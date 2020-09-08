@@ -127,12 +127,12 @@ export default new Vuex.Store({
       }
     },
 
-    async deleteVaultKeep({ state, dispatch }, keepId) {
-      debugger;
-      let foundVaultKeep = this.state.currentVaultKeeps.find(
-        (vaultkeep) => vaultkeep.keepId == keepId
-      );
-      console.log("found it", foundVaultKeep);
+    async deleteVaultKeep({ state, dispatch }, vaultkeepId) {
+      try {
+        await api.delete("vaultkeeps/" + vaultkeepId);
+      } catch (error) {
+        console.error(error);
+      }
     },
     getPublicKeeps({ commit, dispatch }) {
       api.get("keeps").then((res) => commit("setPublicKeeps", res.data));
@@ -141,7 +141,7 @@ export default new Vuex.Store({
       api.get("keeps/user").then((res) => commit("setMyKeeps", res.data));
     },
     getMyVaults({ commit }) {
-      api.get("vaults/user").then((res) => commit("setVaults", res.data));
+      api.get("vaults").then((res) => commit("setVaults", res.data));
     },
     getCurrentKeep({ commit }, id) {
       api.get("keeps/" + id).then((res) => commit("setCurrentKeep", res.data));
@@ -158,6 +158,10 @@ export default new Vuex.Store({
     },
     clearVaultKeeps({ commit }) {
       commit("clearVaultKeeps");
+    },
+    viewKeepCount({ state, commit }, id) {
+      let foundKeep = state.publicKeeps.find((keep) => keep.id == id);
+      commit("increaseKeepCount", foundKeep);
     },
   },
 });

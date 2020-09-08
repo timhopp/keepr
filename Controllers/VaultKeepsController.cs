@@ -42,8 +42,25 @@ namespace Keepr.Controllers
       }
     }
 
-    [HttpDelete]
-    public ActionResult<VaultKeep> Delete([FromBody] )
+    [HttpDelete("{id}")]
+    public ActionResult<VaultKeep> Delete(int id)
+    {
+      try
+      {
+        Claim user = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+        if (user == null)
+        {
+          throw new Exception("You must be logged in to delete a vault Keep, sir");
+        }
+
+        return Ok(_vks.Delete(user.Value, id));
+      }
+      catch (System.Exception err)
+      {
+        return BadRequest(err.Message);
+      }
+
+    }
 
     // [HttpGet]
     // public ActionResult<IEnumerable<VaultKeep>> Get()

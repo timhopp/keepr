@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Keepr.Controllers
 {
+  [Authorize]
   [ApiController]
   [Route("api/[controller]")]
   public class VaultsController : ControllerBase
@@ -24,13 +25,18 @@ namespace Keepr.Controllers
       _vks = vks;
 
     }
-
+    [Authorize]
     [HttpGet("{id}")]
     public ActionResult<Vault> GetById(int id)
     {
       try
       {
-        return Ok(_vs.GetById(id));
+        Claim user = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+        if (user == null)
+        {
+          throw new Exception("You must be logged in to get your Keeps, sir");
+        }
+        return Ok(_vs.GetById(user.Value, id));
       }
       catch (System.Exception err)
       {
@@ -38,7 +44,8 @@ namespace Keepr.Controllers
       }
     }
 
-    [HttpGet("user")]
+    [Authorize]
+    [HttpGet]
     public ActionResult<Vault> GetMyVaults()
     {
       try
@@ -57,7 +64,7 @@ namespace Keepr.Controllers
       }
     }
 
-    // [Authorize]
+    [Authorize]
     [HttpGet("{vaultId}/keeps")]
     public ActionResult<VaultKeep> GetKeepsByVaultId(int vaultId)
     {

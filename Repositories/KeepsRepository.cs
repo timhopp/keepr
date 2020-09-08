@@ -26,11 +26,20 @@ namespace Keepr.Repositories
       string sql = "SELECT * FROM Keeps WHERE userId = @userId";
       return _db.Query<Keep>(sql, new { userId });
     }
+
+    internal Keep GetPrivateById(string userId, int id)
+    {
+      string sql = "SELECT * FROM Keeps WHERE id = @ID AND userID = @userId";
+      return _db.QueryFirstOrDefault<Keep>(sql, new { id, userId });
+    }
+
     internal Keep GetById(int id)
     {
       string sql = "SELECT * FROM Keeps WHERE id = @Id";
       return _db.QueryFirstOrDefault<Keep>(sql, new { id });
     }
+
+
     internal Keep Create(Keep newKeep)
     {
       string sql = @"INSERT INTO Keeps
@@ -45,10 +54,10 @@ namespace Keepr.Repositories
 
     //NOTE NEED TO ADD USER ID BRUH
     //string userId, userId,  AND userId = @UserId 
-    internal bool Delete(int id)
+    internal bool Delete(string userId, int id)
     {
-      string sql = "DELETE FROM Keeps WHERE id = @Id LIMIT 1";
-      int rowsAffected = _db.Execute(sql, new { id });
+      string sql = "DELETE FROM Keeps WHERE id = @Id AND userId = @userId LIMIT 1";
+      int rowsAffected = _db.Execute(sql, new { userId, id });
       return rowsAffected == 1;
     }
 

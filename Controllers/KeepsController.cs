@@ -32,12 +32,19 @@ namespace Keepr.Controllers
         return BadRequest(e.Message);
       };
     }
+
     [HttpGet("{id}")]
     public ActionResult<Keep> GetById(int id)
     {
       try
       {
-        return Ok(_ks.GetById(id));
+        Claim user = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+        if (user == null)
+        {
+          return Ok(_ks.GetByIdPublic(id));
+        }
+
+        return Ok(_ks.GetById(user.Value, id));
       }
       catch (System.Exception err)
       {
@@ -65,8 +72,8 @@ namespace Keepr.Controllers
       }
     }
 
-    [HttpPost]
     [Authorize]
+    [HttpPost]
     public ActionResult<Keep> Post([FromBody] Keep newKeep)
     {
       try
@@ -95,7 +102,7 @@ namespace Keepr.Controllers
           throw new Exception("You must be logged in to create a Keep, sir");
         }
 
-        return Ok(_ks.Delete(id));
+        return Ok(_ks.Delete(user.Value, id));
       }
       catch (System.Exception err)
       {

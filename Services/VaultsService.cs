@@ -14,9 +14,9 @@ namespace Keepr.Services
       _repo = repo;
     }
 
-    public Vault GetById(int id)
+    public Vault GetById(string userId, int id)
     {
-      Vault foundVault = _repo.GetById(id);
+      Vault foundVault = _repo.GetById(userId, id);
       if (foundVault == null)
       {
         throw new Exception("Invalid Vault Id");
@@ -42,10 +42,10 @@ namespace Keepr.Services
       return _repo.Create(newVault);
     }
 
-    //string userId, userId,
+
     internal object Delete(string userId, int id)
     {
-      GetById(id);
+      GetById(userId, id);
       bool deleted = _repo.Delete(userId, id);
       if (!deleted)
       {
@@ -58,7 +58,7 @@ namespace Keepr.Services
     //Also, is a new function required to update the views and shares? Most likely
     public Vault Update(Vault updatedVault)
     {
-      Vault foundVault = GetById(updatedVault.Id);
+      Vault foundVault = GetById(updatedVault.UserId, updatedVault.Id);
       updatedVault.Name = updatedVault.Name == null ? foundVault.Name : updatedVault.Name;
       updatedVault.Description = updatedVault.Description == null ? foundVault.Description : updatedVault.Description;
 
