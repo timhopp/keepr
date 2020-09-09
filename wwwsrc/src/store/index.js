@@ -127,9 +127,10 @@ export default new Vuex.Store({
       }
     },
 
-    async deleteVaultKeep({ state, dispatch }, vaultkeepId) {
+    async deleteVaultKeep({ state, dispatch }, theids) {
       try {
-        await api.delete("vaultkeeps/" + vaultkeepId);
+        await api.delete("vaultkeeps/" + theids.id);
+        this.dispatch("getVaultKeeps", theids.vaultId);
       } catch (error) {
         console.error(error);
       }
@@ -159,9 +160,9 @@ export default new Vuex.Store({
     clearVaultKeeps({ commit }) {
       commit("clearVaultKeeps");
     },
-    viewKeepCount({ state, commit }, id) {
-      let foundKeep = state.publicKeeps.find((keep) => keep.id == id);
-      commit("increaseKeepCount", foundKeep);
-    },
+    // viewKeepCount({ state, commit }, id) {
+    //   let foundKeep = state.publicKeeps.find((keep) => keep.id == id);
+    //   commit("increaseKeepCount", foundKeep);
+    // },
   },
 });

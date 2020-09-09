@@ -52,7 +52,6 @@ namespace Keepr.Controllers
       }
     }
 
-    //NOTE Need to test this still once front end user is established
     [HttpGet("user")]
     public ActionResult<Keep> GetMyKeeps()
     {

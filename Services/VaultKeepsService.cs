@@ -37,8 +37,8 @@ namespace Keepr.Services
 
     internal object Delete(string userId, int id)
     {
-      GetByVaultKeepId(id);
-      bool deleted = _repo.Delete(userId, id);
+      VaultKeep Delete = GetByVaultKeepId(id);
+      bool deleted = _repo.Delete(userId, id, Delete.KeepId);
       if (!deleted)
       {
         throw new Exception("You can't delete a Vault Keep you don't own!");

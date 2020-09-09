@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="bug col-4 bg-warning m-3 p-2 rounded" @click="viewVault(vault.id)">
-      <h5>{{vault.name}}</h5>
-      <h5>{{vault.description}}</h5>
+    <div class="bug bg-success pl-5 pr-5 p-2 m-2 rounded" @click="viewVault(vault.id)">
+      <h1 class="text-center">{{vault.name}}</h1>
+      <h3 class="text-center">{{vault.description}}</h3>
     </div>
   </div>
 </template>

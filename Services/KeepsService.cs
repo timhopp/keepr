@@ -94,6 +94,7 @@ namespace Keepr.Services
       updatedKeep.Name = updatedKeep.Name == null ? foundKeep.Name : updatedKeep.Name;
       updatedKeep.Description = updatedKeep.Description == null ? foundKeep.Description : updatedKeep.Description;
       updatedKeep.Img = updatedKeep.Img == null ? foundKeep.Img : updatedKeep.Img;
+      updatedKeep.IsPrivate = updatedKeep.IsPrivate == false ? foundKeep.IsPrivate : updatedKeep.IsPrivate;
       bool updated = _repo.Update(updatedKeep);
       if (!updated)
       {

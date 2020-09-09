@@ -1,10 +1,14 @@
 <template>
   <div class="dashboard">
-    <h1>Your Profile</h1>
-    <h3>Your Vaults</h3>
-    <vault v-for="aVault in vaults" :vault="aVault" :key="aVault.id"></vault>
-    <h3>Your Keeps</h3>
-    <keep v-for="currentKeep in myKeeps" :keep="currentKeep" :key="currentKeep.id"></keep>
+    <h1 class="text-light text-center">Your Profile</h1>
+    <h3 class="text-light text-center">Your Vaults</h3>
+    <div class="row justify-content-center">
+      <vault v-for="aVault in vaults" :vault="aVault" :key="aVault.id"></vault>
+    </div>
+    <h3 class="text-light text-center">Your Keeps</h3>
+    <div class="row justify-content-center">
+      <keep v-for="currentKeep in myKeeps" :keep="currentKeep" :key="currentKeep.id"></keep>
+    </div>
   </div>
 </template>
 
@@ -34,4 +38,5 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+</style>

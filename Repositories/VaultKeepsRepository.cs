@@ -21,7 +21,8 @@ namespace Keepr.Repositories
       (vaultId, keepId, userId)
       VALUES
       (@VaultId, @KeepId, @userId);
-      SELECT LAST_INSERT_ID();";
+      SELECT LAST_INSERT_ID();
+      UPDATE Keeps SET keeps = keeps + 1 WHERE id = @keepId";
       return _db.ExecuteScalar<int>(sql, newVaultKeep);
     }
 
@@ -36,11 +37,12 @@ namespace Keepr.Repositories
         WHERE(vaultkeeps.vaultId = @vaultId)";
       return _db.Query<VaultKeepViewModel>(sql, new { vaultId });
     }
-    internal bool Delete(string userid, int id)
+    internal bool Delete(string userid, int id, int keepId)
     {
-      string sql = "DELETE FROM VaultKeeps WHERE id = @Id AND userid = @UserId LIMIT 1;";
-      int rowsAffected = _db.Execute(sql, new { userid, id });
-      return rowsAffected == 1;
+      string sql = @"DELETE FROM VaultKeeps WHERE id = @Id AND userid = @UserId LIMIT 1; UPDATE Keeps SET keeps = keeps - 1 WHERE id = @keepId;
+      ";
+      int rowsAffected = _db.Execute(sql, new { userid, id, keepId });
+      return rowsAffected == 2;
     }
 
 

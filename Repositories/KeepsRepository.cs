@@ -35,7 +35,8 @@ namespace Keepr.Repositories
 
     internal Keep GetById(int id)
     {
-      string sql = "SELECT * FROM Keeps WHERE id = @Id";
+      string sql = @"UPDATE Keeps SET views = views + 1 WHERE id = @Id; 
+      SELECT * FROM Keeps WHERE id = @Id";
       return _db.QueryFirstOrDefault<Keep>(sql, new { id });
     }
 
