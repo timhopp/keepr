@@ -7,7 +7,7 @@
       <h5 class="text-light">{{vault.description}}</h5>
     </div>
     <div class="row justify-content-center">
-      <button @click="deleteVault(vault.id)" class="btn btn-info m-3">DELETE</button>
+      <button @click="deleteVault(vault.id)" class="btn btn-danger m-3">DELETE</button>
 
       <!-- Keeps Modal -->
       <button

@@ -17,11 +17,6 @@
         data-toggle="modal"
         data-target="#addToVaultModal"
       >Add To Vault</button>
-      <button
-        v-if="currentKeep.userId == user.sub"
-        @click="deleteKeep(currentKeep.id)"
-        class="btn btn-info m-3"
-      >Delete</button>
 
       <!-- Keeps Modal -->
       <button
@@ -34,32 +29,57 @@
       <div class="modal fade" id="keepModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header bg-warning">
               <h5 class="modal-title" id="exampleModalLabel">Edit Your Keep</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body bg-warning">
               <form @submit.prevent="editKeep(currentKeep.id)">
-                <label for>Title</label>
-                <input type="text" placeholder="Title" v-model="editedKeep.Name" required />
-                <label for>Article Link</label>
-                <input type="text" placeholder="Article" v-model="editedKeep.Description" required />
-                <label for>Img</label>
-                <input type="text" placeholder="imgUrl" v-model="editedKeep.Img" />
-                <label class="form-check-label" for="privateCheck">Private</label>
-                <input
-                  type="checkbox"
-                  class="form-check-input m-3"
-                  id="privateCheck"
-                  v-model="editedKeep.IsPrivate"
-                />
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Edit Keep</button>
+                <div class="row ml-4 mt-1">
+                  <label for>Title</label>
+                </div>
+                <div class="row justify-content-center">
+                  <input type="text" class="col-11" placeholder="Title" v-model="editedKeep.Name" />
+                </div>
+                <div class="row ml-4 mt-1">
+                  <label for>Article Link</label>
+                </div>
+                <div class="row justify-content-center">
+                  <input
+                    type="text"
+                    class="col-11"
+                    placeholder="Article"
+                    v-model="editedKeep.Description"
+                  />
+                </div>
+                <div class="row ml-4 mt-1">
+                  <label for>Img</label>
+                </div>
+                <div class="row justify-content-center mt-1">
+                  <input type="text" class="col-11" placeholder="imgUrl" v-model="editedKeep.Img" />
+                </div>
+                <div class="row justify-content-center mt-3">
+                  <label class="form-check-label col-4" for="privateCheck">Private</label>
+                  <input
+                    type="checkbox"
+                    class="form-check-input col-8 ml-3"
+                    id="privateCheck"
+                    v-model="editedKeep.IsPrivate"
+                  />
+                </div>
+                <div class="row justify-content-center">
+                  <button type="submit" class="btn btn-primary mt-3 mr-3">Edit Keep</button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary mt-3 ml-3"
+                    data-dismiss="modal"
+                  >Close</button>
+                </div>
               </form>
             </div>
-            <div class="modal-footer"></div>
+            <div class="modal-footer bg-warning"></div>
           </div>
         </div>
       </div>
@@ -92,6 +112,11 @@
           </div>
         </div>
       </div>
+      <button
+        v-if="currentKeep.userId == user.sub"
+        @click="deleteKeep(currentKeep.id)"
+        class="btn btn-danger m-3"
+      >Delete</button>
     </div>
   </div>
 </template>

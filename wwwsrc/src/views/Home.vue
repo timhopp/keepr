@@ -1,7 +1,5 @@
 <template>
   <div class="home pt-3">
-    <h1 class="row justify-content-center text-light">Welcome To Keeper</h1>
-
     <!-- Keeps Modal -->
     <div class="row justify-content-center">
       <button
@@ -128,6 +126,7 @@
     <div class="row justify-content-center">
       <keep v-for="keepItem in publicKeeps" :keep="keepItem" :key="keepItem.id"></keep>
     </div>
+    <div id="fad"></div>
   </div>
 </template>
 
@@ -170,3 +169,21 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.home {
+  background-image: linear-gradient(To Top, #f4f1def1, #f4f1def5),
+    url("https://storage.ning.com/topology/rest/1.0/file/get/2769063122?profile=original");
+}
+/* #fad {
+  position: fixed !important;
+  height: 100vh;
+  width: 100vw;
+  background-color: #f4f1de8f;
+} */
+
+.btn-success:hover {
+  transition: All 0.2s linear;
+  background-color: #f5be5e !important;
+}
+</style>

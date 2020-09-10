@@ -39,4 +39,8 @@ export default {
 </script>
 
 <style>
+.dashboard {
+  background-image: linear-gradient(To Top, #f4f1def1, #f4f1def5),
+    url("https://storage.ning.com/topology/rest/1.0/file/get/2769063122?profile=original");
+}
 </style>

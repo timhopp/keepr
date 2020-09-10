@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div class="bug bg-success pl-5 pr-5 p-2 m-2 rounded" @click="viewVault(vault.id)">
+    <div
+      class="bug bg-warning pl-5 pr-5 p-2 m-2 rounded shadow-sm hover"
+      @click="viewVault(vault.id)"
+    >
       <h1 class="text-center">{{vault.name}}</h1>
       <h3 class="text-center">{{vault.description}}</h3>
     </div>
@@ -32,4 +35,11 @@ export default {
 
 
 <style scoped>
+.hover {
+  transition: all 0.3s ease;
+}
+.hover:hover {
+  box-shadow: 3px 10px #bdbdaf !important;
+  transform: translateY(-3px);
+}
 </style>
