@@ -70,7 +70,11 @@
         class="btn btn-danger m-2"
       >Remove From Vault</button>
     </div>
-    <div v-else class="bug bg-warning m-3 p-4 rounded shadow-sm hover" @click="viewKeep(keep.id)">
+    <div
+      v-else
+      class="bug bg-warning m-3 p-4 rounded shadow-sm hover card forcedwidth col"
+      @click="viewKeep(keep.id)"
+    >
       <h3 class="text-primary ml-2">{{keep.name}}</h3>
       <div class="row justify-content-center">
         <img :src="keep.img" alt="No Image" class="img" />
@@ -155,6 +159,7 @@ export default {
       });
     },
   },
+
   components: {},
 };
 </script>
@@ -162,7 +167,10 @@ export default {
 
 <style scoped>
 img {
-  max-width: 400px;
+  max-width: 300px;
+}
+.forcedwidth {
+  width: 310px;
 }
 .hover {
   transition: all 0.3s ease;

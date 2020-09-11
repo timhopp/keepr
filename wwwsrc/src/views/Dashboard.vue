@@ -6,7 +6,9 @@
     </div>
     <h1 class="text-primary text-center">Your Keeps</h1>
     <div class="row justify-content-center">
-      <keep v-for="currentKeep in myKeeps" :keep="currentKeep" :key="currentKeep.id"></keep>
+      <div class="card-columns">
+        <keep v-for="currentKeep in myKeeps" :keep="currentKeep" :key="currentKeep.id"></keep>
+      </div>
     </div>
   </div>
 </template>
@@ -41,5 +43,8 @@ export default {
 .dashboard {
   background-image: linear-gradient(To Top, #f4f1def1, #f4f1def5),
     url("https://storage.ning.com/topology/rest/1.0/file/get/2769063122?profile=original");
+}
+.card-columns {
+  column-count: 5;
 }
 </style>

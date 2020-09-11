@@ -144,7 +144,9 @@
       </div>
     </div>
     <div class="row justify-content-center">
-      <keep v-for="keepItem in publicKeeps" :keep="keepItem" :key="keepItem.id"></keep>
+      <div class="card-columns">
+        <keep v-for="keepItem in publicKeeps" :keep="keepItem" :key="keepItem.id"></keep>
+      </div>
     </div>
     <div id="fad"></div>
   </div>
@@ -201,6 +203,36 @@ export default {
     clearKeepCreate() {
       this.newKeep = {};
     },
+    // resizeMasonryItem(item) {
+    //   /* Get the grid object, its row-gap, and the size of its implicit rows */
+    //   let grid = document.getElementsByClassName("masonry")[0],
+    //     rowGap = parseInt(
+    //       window.getComputedStyle(grid).getPropertyValue("grid-row-gap")
+    //     ),
+    //     rowHeight = parseInt(
+    //       window.getComputedStyle(grid).getPropertyValue("grid-auto-rows")
+    //     );
+    //   let rowSpan = Math.ceil(
+    //     (item.querySelector(".card-content").getBoundingClientRect().height +
+    //       rowGap) /
+    //       (rowHeight + rowGap)
+    //   );
+
+    //   /* Set the spanning as calculated above (S) */
+    //   item.style.gridRowEnd = "span " + rowSpan;
+    // },
+    // resizeAllMasonryItems() {
+    //   // Get all item class objects in one list
+    //   let allItems = document.getElementsByClassName("card");
+
+    //   /*
+    //    * Loop through the above list and execute the spanning function to
+    //    * each list-item (i.e. each masonry item)
+    //    */
+    //   for (let i = 0; i < allItems.length; i++) {
+    //     this.resizeMasonryItem(allItems[i]);
+    //   }
+    // },
   },
   components: {
     keep,
@@ -224,4 +256,13 @@ export default {
   transition: All 0.2s linear;
   background-color: #f5be5e !important;
 }
+.card-columns {
+  column-count: 5;
+}
+/* .masonry {
+  display: grid;
+  grid-gap: 15px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-auto-rows: 0;
+} */
 </style>

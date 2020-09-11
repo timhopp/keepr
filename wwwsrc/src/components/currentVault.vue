@@ -68,7 +68,9 @@
       <button @click="deleteVault(vault.id)" class="btn text-dark btn-danger m-3">Delete</button>
     </div>
     <div class="row justify-content-center">
-      <keep v-for="akeep in keeps" :keep="akeep" :key="akeep.id"></keep>
+      <div class="card-columns">
+        <keep v-for="akeep in keeps" :keep="akeep" :key="akeep.id"></keep>
+      </div>
     </div>
   </div>
 </template>
@@ -125,4 +127,10 @@ export default {
 
 
 <style scoped>
+.card-columns {
+  column-count: 5;
+}
+body {
+  height: 100%;
+}
 </style>
