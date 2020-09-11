@@ -1,11 +1,10 @@
 <template>
   <div class="dashboard">
-    <h1 class="text-light text-center">Your Profile</h1>
-    <h3 class="text-light text-center">Your Vaults</h3>
+    <h1 class="text-primary text-center">Your Vaults</h1>
     <div class="row justify-content-center">
       <vault v-for="aVault in vaults" :vault="aVault" :key="aVault.id"></vault>
     </div>
-    <h3 class="text-light text-center">Your Keeps</h3>
+    <h1 class="text-primary text-center">Your Keeps</h1>
     <div class="row justify-content-center">
       <keep v-for="currentKeep in myKeeps" :keep="currentKeep" :key="currentKeep.id"></keep>
     </div>

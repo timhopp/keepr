@@ -11,14 +11,14 @@
       <div class="modal fade" id="keepModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header bg-info">
               <h5 class="modal-title" id="exampleModalLabel">Create A Keep</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              <form @submit.prevent="createKeep(newKeep)">
+              <form @submit.prevent="createKeep(newKeep), clearKeepCreate()">
                 <div class="row ml-4 mt-1">
                   <label for>Title</label>
                 </div>
@@ -59,12 +59,17 @@
                   />
                 </div>
                 <div class="row justify-content-center mt-3">
-                  <button type="submit" class="btn btn-primary m-2">Create Keep</button>
-                  <button type="button" class="btn btn-secondary m-2" data-dismiss="modal">Close</button>
+                  <button id="closeKeepModal" type="submit" class="btn btn-primary m-2">Create Keep</button>
+                  <button
+                    @click="clearKeepCreate()"
+                    type="button"
+                    class="btn btn-secondary m-2"
+                    data-dismiss="modal"
+                  >Close</button>
                 </div>
               </form>
             </div>
-            <div class="modal-footer"></div>
+            <div class="modal-footer bg-info"></div>
           </div>
         </div>
       </div>
@@ -78,14 +83,14 @@
       <div class="modal fade" id="vaultModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header bg-info">
               <h5 class="modal-title" id="exampleModalLabel">Create A Vault</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              <form @submit.prevent="createVault(newVault)">
+              <form @submit.prevent="createVault(newVault), clearVaultCreate">
                 <div>
                   <div class="row ml-4">
                     <label for>Name</label>
@@ -112,13 +117,22 @@
                     />
                   </div>
                   <div class="row justify-content-center mt-2">
-                    <button type="submit" class="btn btn-primary m-2">Create Vault</button>
-                    <button type="button" class="btn btn-secondary m-2" data-dismiss="modal">Close</button>
+                    <button
+                      id="closeVaultModal"
+                      type="submit"
+                      class="btn btn-primary m-2"
+                    >Create Vault</button>
+                    <button
+                      @click="clearVaultCreate()"
+                      type="button"
+                      class="btn btn-secondary m-2"
+                      data-dismiss="modal"
+                    >Close</button>
                   </div>
                 </div>
               </form>
             </div>
-            <div class="modal-footer"></div>
+            <div class="modal-footer bg-info"></div>
           </div>
         </div>
       </div>
@@ -152,6 +166,18 @@ export default {
   mounted() {
     this.$store.dispatch("getPublicKeeps");
     this.$store.dispatch("clearVaultKeeps");
+    $("#keepModal").on("hidden.bs.modal", () => {
+      this.clearKeepCreate();
+    });
+    $("#closeKeepModal").on("click", () => {
+      $("#keepModal").modal("hide");
+    });
+    $("#vaultModal").on("hidden.bs.modal", () => {
+      this.clearVaultCreate();
+    });
+    $("#closeVaultModal").on("click", () => {
+      $("#vaultModal").modal("hide");
+    });
   },
   methods: {
     logout() {
@@ -162,6 +188,12 @@ export default {
     },
     createVault(newVault) {
       this.$store.dispatch("createVault", this.newVault);
+    },
+    clearVaultCreate() {
+      this.newVault = {};
+    },
+    clearKeepCreate() {
+      this.newKeep = {};
     },
   },
   components: {
