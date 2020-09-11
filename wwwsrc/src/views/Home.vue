@@ -32,13 +32,13 @@
                   />
                 </div>
                 <div class="row ml-4 mt-1">
-                  <label for>Article Link</label>
+                  <label for>Description</label>
                 </div>
                 <div class="row justify-content-center">
                   <input
                     type="text"
                     class="col-11"
-                    placeholder="Article"
+                    placeholder="Descriptions"
                     v-model="newKeep.Description"
                     required
                   />
@@ -47,7 +47,13 @@
                   <label for>Img</label>
                 </div>
                 <div class="row justify-content-center">
-                  <input type="text" class="col-11" placeholder="imgUrl" v-model="newKeep.Img" />
+                  <input
+                    type="text"
+                    class="col-11"
+                    placeholder="imgUrl"
+                    v-model="newKeep.Img"
+                    required
+                  />
                 </div>
                 <div class="row mt-1 ml-5 justify-content-center">
                   <label class="form-check-label col-6" for="privateCheck">Private</label>

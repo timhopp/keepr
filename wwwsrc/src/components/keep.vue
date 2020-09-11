@@ -6,7 +6,9 @@
     >
       <div @click="viewKeep(keep.id)">
         <h3 class="text-primary ml-3">{{keep.name}}</h3>
-        <img :src="keep.img" alt="No Image" class="img" />
+        <div class="row justify-content-center">
+          <img :src="keep.img" alt="No Image" class="img" />
+        </div>
         <h5 class="text-primary ml-2">{{keep.description}}</h5>
         <div class="row justify-content-center">
           <div class="col-3">
@@ -68,9 +70,11 @@
         class="btn btn-danger m-2"
       >Remove From Vault</button>
     </div>
-    <div v-else class="bug bg-warning m-3 p-2 rounded shadow-sm hover" @click="viewKeep(keep.id)">
+    <div v-else class="bug bg-warning m-3 p-4 rounded shadow-sm hover" @click="viewKeep(keep.id)">
       <h3 class="text-primary ml-2">{{keep.name}}</h3>
-      <img :src="keep.img" alt="No Image" class="img" />
+      <div class="row justify-content-center">
+        <img :src="keep.img" alt="No Image" class="img" />
+      </div>
       <h5 class="text-primary ml-2">{{keep.description}}</h5>
       <div class="row justify-content-center">
         <div class="col-3">
@@ -158,7 +162,7 @@ export default {
 
 <style scoped>
 img {
-  width: 400px;
+  max-width: 400px;
 }
 .hover {
   transition: all 0.3s ease;
