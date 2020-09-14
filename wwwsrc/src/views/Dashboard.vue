@@ -44,7 +44,32 @@ export default {
   background-image: linear-gradient(To Top, #f4f1def1, #f4f1def5),
     url("https://storage.ning.com/topology/rest/1.0/file/get/2769063122?profile=original");
 }
-.card-columns {
-  column-count: 5;
+@media (min-width: 1em) {
+  .card-columns {
+    column-count: 1;
+  }
+}
+
+@media (min-width: 45em) {
+  .card-columns {
+    column-count: 2;
+  }
+}
+
+@media (min-width: 67em) {
+  .card-columns {
+    column-count: 3;
+  }
+}
+
+@media (min-width: 90em) {
+  .card-columns {
+    column-count: 4;
+  }
+}
+@media (min-width: 105em) {
+  .card-columns {
+    column-count: 5;
+  }
 }
 </style>

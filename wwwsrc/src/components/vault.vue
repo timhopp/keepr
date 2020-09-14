@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="bug bg-warning pl-5 pr-5 p-2 m-2 rounded shadow-sm hover"
+      class="bug bg-warning pl-5 pr-5 p-2 m-4 rounded shadow-sm hover"
       @click="viewVault(vault.id)"
     >
       <h1 class="text-primary text-center">{{vault.name}}</h1>

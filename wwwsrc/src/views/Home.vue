@@ -256,13 +256,33 @@ export default {
   transition: All 0.2s linear;
   background-color: #f5be5e !important;
 }
-.card-columns {
-  column-count: 5;
+
+@media (min-width: 1em) {
+  .card-columns {
+    column-count: 1;
+  }
 }
-/* .masonry {
-  display: grid;
-  grid-gap: 15px;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  grid-auto-rows: 0;
-} */
+
+@media (min-width: 45em) {
+  .card-columns {
+    column-count: 2;
+  }
+}
+
+@media (min-width: 67em) {
+  .card-columns {
+    column-count: 3;
+  }
+}
+
+@media (min-width: 90em) {
+  .card-columns {
+    column-count: 4;
+  }
+}
+@media (min-width: 105em) {
+  .card-columns {
+    column-count: 5;
+  }
+}
 </style>
