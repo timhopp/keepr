@@ -68,7 +68,7 @@
         </div>
         <button @click="deleteVault(vault.id)" class="btn text-dark btn-danger m-3">Delete</button>
       </div>
-      <div class="row justify-content-center mr-4">
+      <div class="row justify-content-center">
         <div class="card-columns">
           <keep v-for="akeep in keeps" :keep="akeep" :key="akeep.id"></keep>
         </div>

@@ -2,7 +2,7 @@
   <div>
     <div
       v-if="this.$store.state.currentVaultKeeps.length > 0"
-      class="bug bg-warning m-3 p-4 rounded shadow-sm hover card forcedwidth col"
+      class="bug bg-warning m-3 p-4 rounded shadow-sm hover card forcedwidth col pointer"
     >
       <div @click="viewKeep(keep.id)">
         <h3 class="text-primary">{{keep.name}}</h3>
@@ -74,7 +74,7 @@
     </div>
     <div
       v-else
-      class="bug bg-warning m-3 p-4 rounded shadow-sm hover card forcedwidth col"
+      class="bug bg-warning m-3 p-4 rounded shadow-sm hover card forcedwidth col pointer"
       @click="viewKeep(keep.id)"
     >
       <h3 class="text-primary">{{keep.name}}</h3>
@@ -180,5 +180,8 @@ img {
 .hover:hover {
   box-shadow: 3px 10px #abcebd !important;
   transform: translateY(-3px);
+}
+.pointer {
+  cursor: pointer;
 }
 </style>

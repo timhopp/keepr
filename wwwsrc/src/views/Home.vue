@@ -8,7 +8,7 @@
         data-toggle="modal"
         data-target="#keepModal"
       >Create Keep</button>
-      <div class="modal fade" id="keepModal" tabindex="-1" role="dialog">
+      <div class="modal fade justify-content-center" id="keepModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header bg-info">

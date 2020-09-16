@@ -1,7 +1,7 @@
 <template>
   <div class="currentKeep">
     <div class="row justify-content-center">
-      <div class="col-lg-5 col-md-8 col-sm-9 mt-5 p-4 m-4 bg-warning rounded shadow-sm">
+      <div class="col-lg-5 col-md-8 col-sm-9 mt-5 mt-1-sm p-4 m-4 bg-warning rounded shadow-sm">
         <div class="row justify-content-center">
           <h1 class="text-primary text-center">{{currentKeep.name}}</h1>
         </div>
@@ -204,35 +204,41 @@ export default {
 
 
 <style scoped>
-/* @media (min-width: 55em) {
+@media (min-height: 550px) {
   img {
-    max-height: 500px;
-    max-width: 250px;
+    max-height: 200px;
   }
 }
-@media (min-width: 65em) {
+@media (min-height: 600px) {
   img {
-    max-height: 500px;
-    max-width: 300px;
+    max-height: 235px;
   }
 }
-@media (min-width: 80em) {
+@media (min-height: 650px) {
   img {
-    max-height: 500px;
-    max-width: 350px;
+    max-height: 280px;
   }
 }
-@media (min-width: 90em) {
+@media (min-height: 750px) {
   img {
-    max-height: 500px;
-    max-width: 550px;
+    max-height: 375px;
   }
-} */
-img {
+}
+@media (min-height: 800px) {
+  img {
+    max-height: 450px;
+  }
+}
+@media (min-height: 900px) {
+  img {
+    max-height: 600px;
+  }
+}
+/* img {
   max-height: 600px;
-}
-
-/* .container {
-  max-width: 31vw;
 } */
+
+.container {
+  max-width: 31vw;
+}
 </style>
