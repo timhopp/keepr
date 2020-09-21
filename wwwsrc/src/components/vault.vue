@@ -4,12 +4,11 @@
       class="bug bg-warning pl-5 pr-5 p-2 m-4 rounded shadow-sm hover pointer"
       @click="viewVault(vault.id)"
     >
-      <h1 class="text-primary text-center">{{vault.name}}</h1>
-      <h3 class="text-primary text-center">{{vault.description}}</h3>
+      <h1 class="text-primary text-center">{{ vault.name }}</h1>
+      <h4 class="text-primary text-center">{{ vault.description }}</h4>
     </div>
   </div>
 </template>
-
 
 <script>
 export default {
@@ -32,7 +31,6 @@ export default {
   components: {},
 };
 </script>
-
 
 <style scoped>
 .hover {
